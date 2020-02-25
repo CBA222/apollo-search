@@ -1,0 +1,1 @@
+/usr/bin/c++     CMakeFiles/Service.dir/src/service.cpp.o CMakeFiles/Service.dir/src/search_index/index.cpp.o CMakeFiles/Service.dir/src/ranker/pageranker.cpp.o  -o Service -pthread 

@@ -1,0 +1,3 @@
+/home/cba222/projects/crawler-cpp/CMakeFiles/rebuild_cache.dir
+/home/cba222/projects/crawler-cpp/CMakeFiles/Service.dir
+/home/cba222/projects/crawler-cpp/CMakeFiles/edit_cache.dir
