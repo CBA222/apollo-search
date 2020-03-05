@@ -1,0 +1,21 @@
+cmake_minimum_required(VERSION 3.10)
+
+# set the project name and version
+project(apollosearch VERSION 1.0)
+
+include_directories(src)
+include_directories(${CONAN_INCLUDE_DIRS})
+add_executable(Service src/service.cpp src/search_index/index.cpp src/ranker/pageranker.cpp)
+
+set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
+
+include(build/conanbuildinfo.cmake)
+conan_basic_setup()
+set_property(TARGET Service PROPERTY CXX_STANDARD 11)
+
+set(THREADS_PREFER_PTHREAD_FLAG ON)
+find_package(Threads REQUIRED)
+target_link_libraries(Service Threads::Threads)
+
+

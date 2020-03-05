@@ -15,7 +15,7 @@ Index::~Index() {
 		delete[] keys[i];
 	}
 	delete[] keys;
-	delete bphf;
+	//delete bphf;
 }
 
 void Index::populate(std::vector<char *> keys_in) {
@@ -42,7 +42,7 @@ void Index::populate(std::vector<char *> keys_in) {
 		keys[i] = NULL;
 	}
 
-	bphf = new boomphf::mphf<char *,Custom_string_Hasher>(keys_in.size(), keys_in, 1, 4.0);
+	//bphf = new boomphf::mphf<char *,Custom_string_Hasher>(keys_in.size(), keys_in, 1, 4.0);
 
 	for (std::vector<char *>::iterator it=keys_in.begin();it!=keys_in.end();it++) {
 		insert(*it, 0);
@@ -188,15 +188,15 @@ std::vector<int> Index::get_intersection(char** keys, unsigned int num_keys) {
 }
 
 unsigned int Index::get_idx(char* key, bool& in_set) {
-
+	/*
 	uint64_t idx = bphf->lookup(key);
 	in_set = true;
 	if (idx == ULLONG_MAX) {
 		in_set = false;
 	}
 	return idx;
-
-	/*
+	*/
+	
 	in_set = true;
 	unsigned int base_idx = hash_func(key) % ROW_COUNT;
 
@@ -231,8 +231,10 @@ unsigned int Index::get_idx(char* key, bool& in_set) {
 
 	} while (new_idx != base_idx);
 
+	in_set = false;
+
 	return 0;
-	*/
+	
 }
 
 unsigned int Index::hash_func(char* str) {

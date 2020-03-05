@@ -1,5 +1,14 @@
 [requires]
+openssl/1.1.1d
 eigen/3.3.7
+libpq/11.5
+nlohmann_json/3.7.3
+parallel-hashmap/1.30
+libevent/2.1.11
+amqp-cpp/4.1.5
+spdlog/1.5.0
+yaml-cpp/0.6.3
+gtest/1.10.0
 
 [generators]
 cmake

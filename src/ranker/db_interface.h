@@ -1,3 +1,5 @@
+
+
 class DatabaseInterface
 {
     DatabaseInterface(char* name);

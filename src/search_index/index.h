@@ -8,11 +8,13 @@ High-performance in-memory inverted index
 #include <string>
 #include <string.h>
 #include <exception>
-#include "BooPHF.h"
+#include <vector>
+//#include "BooPHF.h"
 
 #ifndef INDEX_H
 #define INDEX_H
 
+/*
 class Custom_string_Hasher
 {
 public:
@@ -35,9 +37,9 @@ public:
 		return hash;
 	}
 
-};
+};*/
 
-typedef boomphf::mphf<  char *, Custom_string_Hasher  > boophf_t;
+//typedef boomphf::mphf<  char *, Custom_string_Hasher  > boophf_t;
 
 class Index
 {
@@ -49,11 +51,10 @@ private:
 	int *col_count;
 	char** keys;
 
-	boophf_t * bphf = NULL;
+	//boophf_t * bphf = NULL;
 
 	int key_count = 0;
 	int collisions = 0;
-
 	
 	unsigned int hash_func(char* str);
 

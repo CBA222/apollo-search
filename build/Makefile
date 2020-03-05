@@ -111,17 +111,44 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named Service
+# Target rules for targets named test_ranker
 
 # Build rule for target.
-Service: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 Service
-.PHONY : Service
+test_ranker: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test_ranker
+.PHONY : test_ranker
 
 # fast build rule for target.
-Service/fast:
-	$(MAKE) -f CMakeFiles/Service.dir/build.make CMakeFiles/Service.dir/build
-.PHONY : Service/fast
+test_ranker/fast:
+	$(MAKE) -f CMakeFiles/test_ranker.dir/build.make CMakeFiles/test_ranker.dir/build
+.PHONY : test_ranker/fast
+
+src/data_service/ranker_service.o: src/data_service/ranker_service.cpp.o
+
+.PHONY : src/data_service/ranker_service.o
+
+# target to build an object file
+src/data_service/ranker_service.cpp.o:
+	$(MAKE) -f CMakeFiles/test_ranker.dir/build.make CMakeFiles/test_ranker.dir/src/data_service/ranker_service.cpp.o
+.PHONY : src/data_service/ranker_service.cpp.o
+
+src/data_service/ranker_service.i: src/data_service/ranker_service.cpp.i
+
+.PHONY : src/data_service/ranker_service.i
+
+# target to preprocess a source file
+src/data_service/ranker_service.cpp.i:
+	$(MAKE) -f CMakeFiles/test_ranker.dir/build.make CMakeFiles/test_ranker.dir/src/data_service/ranker_service.cpp.i
+.PHONY : src/data_service/ranker_service.cpp.i
+
+src/data_service/ranker_service.s: src/data_service/ranker_service.cpp.s
+
+.PHONY : src/data_service/ranker_service.s
+
+# target to generate assembly for a file
+src/data_service/ranker_service.cpp.s:
+	$(MAKE) -f CMakeFiles/test_ranker.dir/build.make CMakeFiles/test_ranker.dir/src/data_service/ranker_service.cpp.s
+.PHONY : src/data_service/ranker_service.cpp.s
 
 src/ranker/pageranker.o: src/ranker/pageranker.cpp.o
 
@@ -129,7 +156,7 @@ src/ranker/pageranker.o: src/ranker/pageranker.cpp.o
 
 # target to build an object file
 src/ranker/pageranker.cpp.o:
-	$(MAKE) -f CMakeFiles/Service.dir/build.make CMakeFiles/Service.dir/src/ranker/pageranker.cpp.o
+	$(MAKE) -f CMakeFiles/test_ranker.dir/build.make CMakeFiles/test_ranker.dir/src/ranker/pageranker.cpp.o
 .PHONY : src/ranker/pageranker.cpp.o
 
 src/ranker/pageranker.i: src/ranker/pageranker.cpp.i
@@ -138,7 +165,7 @@ src/ranker/pageranker.i: src/ranker/pageranker.cpp.i
 
 # target to preprocess a source file
 src/ranker/pageranker.cpp.i:
-	$(MAKE) -f CMakeFiles/Service.dir/build.make CMakeFiles/Service.dir/src/ranker/pageranker.cpp.i
+	$(MAKE) -f CMakeFiles/test_ranker.dir/build.make CMakeFiles/test_ranker.dir/src/ranker/pageranker.cpp.i
 .PHONY : src/ranker/pageranker.cpp.i
 
 src/ranker/pageranker.s: src/ranker/pageranker.cpp.s
@@ -147,7 +174,7 @@ src/ranker/pageranker.s: src/ranker/pageranker.cpp.s
 
 # target to generate assembly for a file
 src/ranker/pageranker.cpp.s:
-	$(MAKE) -f CMakeFiles/Service.dir/build.make CMakeFiles/Service.dir/src/ranker/pageranker.cpp.s
+	$(MAKE) -f CMakeFiles/test_ranker.dir/build.make CMakeFiles/test_ranker.dir/src/ranker/pageranker.cpp.s
 .PHONY : src/ranker/pageranker.cpp.s
 
 src/search_index/index.o: src/search_index/index.cpp.o
@@ -156,7 +183,7 @@ src/search_index/index.o: src/search_index/index.cpp.o
 
 # target to build an object file
 src/search_index/index.cpp.o:
-	$(MAKE) -f CMakeFiles/Service.dir/build.make CMakeFiles/Service.dir/src/search_index/index.cpp.o
+	$(MAKE) -f CMakeFiles/test_ranker.dir/build.make CMakeFiles/test_ranker.dir/src/search_index/index.cpp.o
 .PHONY : src/search_index/index.cpp.o
 
 src/search_index/index.i: src/search_index/index.cpp.i
@@ -165,7 +192,7 @@ src/search_index/index.i: src/search_index/index.cpp.i
 
 # target to preprocess a source file
 src/search_index/index.cpp.i:
-	$(MAKE) -f CMakeFiles/Service.dir/build.make CMakeFiles/Service.dir/src/search_index/index.cpp.i
+	$(MAKE) -f CMakeFiles/test_ranker.dir/build.make CMakeFiles/test_ranker.dir/src/search_index/index.cpp.i
 .PHONY : src/search_index/index.cpp.i
 
 src/search_index/index.s: src/search_index/index.cpp.s
@@ -174,35 +201,35 @@ src/search_index/index.s: src/search_index/index.cpp.s
 
 # target to generate assembly for a file
 src/search_index/index.cpp.s:
-	$(MAKE) -f CMakeFiles/Service.dir/build.make CMakeFiles/Service.dir/src/search_index/index.cpp.s
+	$(MAKE) -f CMakeFiles/test_ranker.dir/build.make CMakeFiles/test_ranker.dir/src/search_index/index.cpp.s
 .PHONY : src/search_index/index.cpp.s
 
-src/service.o: src/service.cpp.o
+tests/service_tests/ranker_test.o: tests/service_tests/ranker_test.cpp.o
 
-.PHONY : src/service.o
+.PHONY : tests/service_tests/ranker_test.o
 
 # target to build an object file
-src/service.cpp.o:
-	$(MAKE) -f CMakeFiles/Service.dir/build.make CMakeFiles/Service.dir/src/service.cpp.o
-.PHONY : src/service.cpp.o
+tests/service_tests/ranker_test.cpp.o:
+	$(MAKE) -f CMakeFiles/test_ranker.dir/build.make CMakeFiles/test_ranker.dir/tests/service_tests/ranker_test.cpp.o
+.PHONY : tests/service_tests/ranker_test.cpp.o
 
-src/service.i: src/service.cpp.i
+tests/service_tests/ranker_test.i: tests/service_tests/ranker_test.cpp.i
 
-.PHONY : src/service.i
+.PHONY : tests/service_tests/ranker_test.i
 
 # target to preprocess a source file
-src/service.cpp.i:
-	$(MAKE) -f CMakeFiles/Service.dir/build.make CMakeFiles/Service.dir/src/service.cpp.i
-.PHONY : src/service.cpp.i
+tests/service_tests/ranker_test.cpp.i:
+	$(MAKE) -f CMakeFiles/test_ranker.dir/build.make CMakeFiles/test_ranker.dir/tests/service_tests/ranker_test.cpp.i
+.PHONY : tests/service_tests/ranker_test.cpp.i
 
-src/service.s: src/service.cpp.s
+tests/service_tests/ranker_test.s: tests/service_tests/ranker_test.cpp.s
 
-.PHONY : src/service.s
+.PHONY : tests/service_tests/ranker_test.s
 
 # target to generate assembly for a file
-src/service.cpp.s:
-	$(MAKE) -f CMakeFiles/Service.dir/build.make CMakeFiles/Service.dir/src/service.cpp.s
-.PHONY : src/service.cpp.s
+tests/service_tests/ranker_test.cpp.s:
+	$(MAKE) -f CMakeFiles/test_ranker.dir/build.make CMakeFiles/test_ranker.dir/tests/service_tests/ranker_test.cpp.s
+.PHONY : tests/service_tests/ranker_test.cpp.s
 
 # Help Target
 help:
@@ -211,17 +238,20 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
-	@echo "... Service"
+	@echo "... test_ranker"
 	@echo "... edit_cache"
+	@echo "... src/data_service/ranker_service.o"
+	@echo "... src/data_service/ranker_service.i"
+	@echo "... src/data_service/ranker_service.s"
 	@echo "... src/ranker/pageranker.o"
 	@echo "... src/ranker/pageranker.i"
 	@echo "... src/ranker/pageranker.s"
 	@echo "... src/search_index/index.o"
 	@echo "... src/search_index/index.i"
 	@echo "... src/search_index/index.s"
-	@echo "... src/service.o"
-	@echo "... src/service.i"
-	@echo "... src/service.s"
+	@echo "... tests/service_tests/ranker_test.o"
+	@echo "... tests/service_tests/ranker_test.i"
+	@echo "... tests/service_tests/ranker_test.s"
 .PHONY : help
 
 
