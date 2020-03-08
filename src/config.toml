@@ -1,0 +1,21 @@
+[rabbitmq]
+
+host = 'localhost'
+
+    [rabbitmq.setup_service]
+
+    queue_name = ''
+    exchange_name = ''
+    routing_key = ''
+
+    [rabbitmq.request_service]
+
+    queue_name = ''
+    exchange_name = ''
+    routing_key = ''
+
+    [rabbitmq.data_service]
+
+    queue_name = ''
+    exchange_name = ''
+    routing_key = ''

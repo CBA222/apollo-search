@@ -5,7 +5,7 @@
 #include <libpq-fe.h>
 //#include "matrix.h"
 #include "search_index/index.h"
-//#include "utils.h"
+#include "utils/vector_space.h"
 #include <parallel_hashmap/phmap.h>
 
 using Eigen::Matrix;
@@ -47,6 +47,7 @@ private:
 
 	VectorF IDF_WEIGHTS;
 	Index *INVERTED_INDEX;
+	VectorSpace VECTOR_SPACE;
 
 	int compute_vector_similarity_score();
 	int compute_min_window_width();

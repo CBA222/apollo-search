@@ -56,24 +56,23 @@ private:
 	int key_count = 0;
 	int collisions = 0;
 	
-	unsigned int hash_func(char* str);
+	unsigned int hash_func(const char* str) const;
+	unsigned int get_idx(const char* key, bool& in_set);
 
 public:
+
+	int get_key_count();
+	int get_collisions();
 	
 	Index();
 	~Index();
 
-	unsigned int get_idx(char* key, bool& in_set);
-
 	void populate(std::vector<char *> keys);
 
-	bool insert(char* key, int val);
-	bool insert(char* key, int *vals, int vals_size);
-	int* get(char* key, int& size);
-
-	int get_key_count();
-	int get_collisions();
-
+	bool insert(const char* key, int val);
+	bool insert(const char* key, int *vals, int vals_size);
+	int* get(const char* key, int& size);
+	
 	std::vector<int> get_intersection(char** keys, unsigned int size);
 
 };

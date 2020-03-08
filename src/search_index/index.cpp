@@ -40,7 +40,7 @@ void Index::populate(std::vector<char *> keys_in) {
 
 	for (int i = 0;i < ROW_COUNT;i++) {
 		keys[i] = NULL;
-	}
+	}	
 
 	//bphf = new boomphf::mphf<char *,Custom_string_Hasher>(keys_in.size(), keys_in, 1, 4.0);
 
@@ -50,7 +50,8 @@ void Index::populate(std::vector<char *> keys_in) {
 	}
 }
 
-bool Index::insert(char* key, int val) {
+bool Index::insert(const char* key, int val) {
+	/*
 	bool in_set;
 	unsigned int idx = get_idx(key, in_set);
 
@@ -71,11 +72,11 @@ bool Index::insert(char* key, int val) {
 	table[idx][c_count] = val;
 	col_count[idx] += 1;
 
-
+	*/
 	return true;
 }
 
-bool Index::insert(char* key, int *vals, int vals_size) {
+bool Index::insert(const char* key, int *vals, int vals_size) {
 	bool in_set;
 	unsigned int idx = get_idx(key, in_set);
 
@@ -88,7 +89,7 @@ bool Index::insert(char* key, int *vals, int vals_size) {
 	return true;
 }
 
-int* Index::get(char* key, int& size) {
+int* Index::get(const char* key, int& size) {
 	bool in_set;
 	unsigned int idx = get_idx(key, in_set);
 	if (!in_set) {
@@ -187,7 +188,7 @@ std::vector<int> Index::get_intersection(char** keys, unsigned int num_keys) {
 
 }
 
-unsigned int Index::get_idx(char* key, bool& in_set) {
+unsigned int Index::get_idx(const char* key, bool& in_set) {
 	/*
 	uint64_t idx = bphf->lookup(key);
 	in_set = true;
@@ -237,7 +238,7 @@ unsigned int Index::get_idx(char* key, bool& in_set) {
 	
 }
 
-unsigned int Index::hash_func(char* str) {
+unsigned int Index::hash_func(const char* str) const {
 	//hash<string_view> ptr_hash;
 	//return ptr_hash(key);
 

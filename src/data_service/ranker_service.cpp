@@ -1,77 +1,160 @@
 #include "data_service/ranker_service.h"
 
-RankerService::RankerService() {}
+RankerService::RankerService() {
+    logger = new stdout_logger();
+    logger->INFO("RANKER SERVICE STARTED");
+}
 
 RankerService::RankerService(string config_filepath) {
-    //YAML::Node config_file = YAML::LoadFile(config_filepath);
-    //RABBITMQ_HOST = config_file['rabbitmq']['host'];
+    logger = new stdout_logger();
+    auto data = toml::parse(config_filepath);
+
+    auto rabbitmq = toml::find(data, "rabbitmq");
+    RABBITMQ_HOST = toml::find<string>(rabbitmq, "host");
+
+    auto setup_conn_info = toml::find(rabbitmq, "setup_conn");
+    SETUP_CONN.QUEUE_NAME = toml::find<string>(setup_conn_info, "queue_name");
+    SETUP_CONN.EXCHANGE_NAME = toml::find<string>(setup_conn_info, "exchange_name");
+    SETUP_CONN.ROUTING_KEY = toml::find<string>(setup_conn_info, "routing_key");
+
+    auto request_conn_info = toml::find(rabbitmq, "request_conn");
+    REQUEST_CONN.QUEUE_NAME = toml::find<string>(request_conn_info, "queue_name");
+    REQUEST_CONN.EXCHANGE_NAME = toml::find<string>(request_conn_info, "exchange_name");
+    REQUEST_CONN.ROUTING_KEY = toml::find<string>(request_conn_info, "routing_key");
+
+    auto data_conn_info = toml::find(rabbitmq, "data_conn");
+    DATA_CONN.QUEUE_NAME = toml::find<string>(data_conn_info, "queue_name");
+    DATA_CONN.EXCHANGE_NAME = toml::find<string>(data_conn_info, "exchange_name");
+    DATA_CONN.ROUTING_KEY = toml::find<string>(data_conn_info, "routing_key");
+
+    logger->INFO("RANKER SERVICE STARTED");
 }
 
 RankerService::RankerService(std::unordered_map<string, string> config_map) {
-    RABBITMQ_HOST = config_map.at("rabbitmq_host");
 }
 
 RankerService::~RankerService() {
 
 }
 
+void RankerService::send_message() {
+    //channel.publish();
+}
+
+void RankerService::process_startup_message(MQ_MESSAGE msg) {
+    string msg_str(msg.data, msg.data_size);
+    json json_data(msg_str);
+
+    for (auto& element : json_data["inverted_index"]) {
+
+    }
+}
+
 void RankerService::start() {
+    /*
+     *
+     *
+     *
+     *
+     *
+     *
+     *
+     */
+
     AppTcpHandler handler;
     AMQP::Address address(RABBITMQ_HOST);
     AMQP::TcpConnection connection(&handler, address);
-    channel = AMQP::Channel(&connection);
+    channel = new AMQP::TcpChannel(&connection);
 
-    //logger = spdlog::stdout_color_mt("main_logger");
+    /* 
+     * SETUP: Get setup data from the server
+     * - Inverted index
+     * - Vector space mapping
+     */
 
-    auto messageCB = [&channel, this](const AMQP::Message &message, uint64_t delivery_tag, bool redelivered) {
-        if (jobs_queue.size() < MAX_JOB_BACKLOG) {
-            struct SearchJob job {message.body(), message.bodySize()};
-            jobs_queue.push(job);
-            channel.ack(delivery_tag);
-            //logger->info("JOB PUSHED.");
-        } else {
-            //logger->info("JOB QUEUE FULL. REJECTING MESSAGE.");
-        }
-    };
+    json startup_message;
+    startup_message["id"] = "RANKER_SERVICE";
+    channel->publish(SETUP_CONN.EXCHANGE_NAME, SETUP_CONN.ROUTING_KEY, startup_message.dump());
 
-    auto errorCB = []() {
-        //logger->error("ERROR RECIEVING MQ MESSAGE.");
-    };
+    channel->consume(SETUP_CONN.QUEUE_NAME)
+        .onSuccess([this](const std::string &consumer_tag) {
+            logger->INFO("Starting consumption of startup message.");
+        })
+        .onReceived([this](const AMQP::Message &message, uint64_t delivery_tag, bool redelivered) {
+            logger->INFO("Recieved startup message");
+            {
+                std::lock_guard<std::mutex> lck(startup_mx);
+            }
+            setup_message = {message.body(), message.bodySize()};
+            startup_cv.notify_one();
+        })
+        .onError([this](const char* message) {
+            logger->INFO("Error in consumption of startup message.");
+        });
+    
+    std::unique_lock<std::mutex> lck(startup_mx);
+    startup_cv.wait(lck);
 
-    auto receivedCB = []() {
-        //logger->error("ERROR RECIEVING MQ MESSAGE.");
-    };
 
-    channel.consume(REQUEST_QUEUE_NAME)
-        .onReceived(receivedCB)
-        .onSuccess(messageCB)
-        .onError(errorCB);
+
+    /*
+     * Once setup is done, start serving search requests
+     *
+     */
+
+    channel->consume(REQUEST_CONN.QUEUE_NAME)
+        .onSuccess([this](const std::string &consumer_tag) {
+            logger->INFO("Consume operation started.");
+        })
+        .onReceived([this](const AMQP::Message &message, uint64_t delivery_tag, bool redelivered) {
+            if (jobs_queue->size() < MAX_JOB_BACKLOG) {
+                struct SearchJob job {message.body(), message.bodySize()};
+                jobs_queue->push(job);
+                channel->ack(delivery_tag);
+                logger->INFO("JOB PUSHED.");
+            } else {
+                logger->WARN("JOB QUEUE FULL. REJECTING MESSAGE.");
+            }
+        })
+        .onError([this](const char* message) {
+            logger->INFO("Error.");
+        });
+
+    channel->consume(DATA_CONN.QUEUE_NAME)
+        .onSuccess([](const std::string &consumer_tag) {
+
+        });
 
     jobs_loop();
 }
 
 void RankerService::jobs_loop() {
     while (true) {
-        if (jobs_queue.size() > 0) {
-            struct SearchJob job = jobs_queue.back();
+        if (jobs_queue->size() > 0) {
+            struct SearchJob job = jobs_queue->back();
 
-            string msg_str(job.data);
-            json query_data = json::parse(msg_str);
+            string msg_str(job.data, job.data_size);
+            json msg_data = json::parse(msg_str);
+            json query_data = msg_data["tokens"];
 
-            std::vector<const char *> tokens;
+            std::vector<char *> tokens;
             for (auto it = query_data.begin();it != query_data.end();it++) {
-                tokens.push_back(it.value());
+                string tmp = it.value().get<string>().c_str();
+                tokens.push_back("HELLO");
             }
-            //std::vector<char *> tokens = query_data["tokens"];
+
             std::vector<PageR> ranked_pages = ranker.rank(tokens, NUM_PAGES_TO_RETRIEVE);
 
             json results_data;
             results_data["id"] = query_data["id"];
-            results_data["results"] = new std::vector<char *>(NUM_PAGES_TO_RETRIEVE);
-            channel.publish(EXCHANGE_NAME, ROUTING_KEY, results_data.dump());
+            
+            auto results = new std::vector<char *>(NUM_PAGES_TO_RETRIEVE);
+            json temp(*results);
+            results_data["results"] = temp;
+            channel->publish(REQUEST_CONN.EXCHANGE_NAME, REQUEST_CONN.ROUTING_KEY, results_data.dump());
 
-            jobs_queue.pop();
-            //logger->info("JOB COMPLETED.");
+            jobs_queue->pop();
+            logger->INFO("JOB COMPLETED.");
         }
     }
 }

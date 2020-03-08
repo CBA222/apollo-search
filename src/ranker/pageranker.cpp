@@ -16,6 +16,8 @@ PageRanker::PageRanker(
 	INVERTED_INDEX = index;
 	IDF_WEIGHTS = idf_weights;
 	IDF_THRESHOLD = idf_threshold;
+	std::vector<char *> tokens;
+	VECTOR_SPACE = VectorSpace(tokens);
 }
 
 PageRanker::~PageRanker() {
@@ -27,7 +29,8 @@ std::vector<int> PageRanker::retrieve_to_rank(char* tokens[], unsigned int token
 	bool in_set;
 
 	for (unsigned int i = 0;i < tokens_size;i++) {
-		unsigned int idx = INVERTED_INDEX->get_idx(tokens[i], in_set);
+		//unsigned int idx = INVERTED_INDEX->get_idx(tokens[i], in_set);
+		unsigned int idx = 0;
 		if (IDF_WEIGHTS(idx, 0) > IDF_THRESHOLD) {
 			tokens_to_use.push_back(tokens[i]);
 		}
@@ -67,7 +70,7 @@ std::vector<PageR> PageRanker::rank(std::vector<char *> tokens, unsigned int num
 
 	for (std::vector<char *>::iterator it=tokens.begin();it!=tokens.end();it++) {
 		bool in_set;
-		unsigned int idx = INVERTED_INDEX->get_idx(*it, in_set);
+		unsigned int idx = VECTOR_SPACE.get_idx(*it, in_set);
 		query_vector(idx, 0) = 1.0 * IDF_WEIGHTS(idx, 0);
 	}
 
