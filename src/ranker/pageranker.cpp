@@ -8,6 +8,8 @@ float bin_to_float(char * ray) {
 	return 0.0;
 }
 
+PageRanker::PageRanker() {}
+
 PageRanker::PageRanker(
 	Index *index, 
 	VectorF idf_weights, 
@@ -111,4 +113,24 @@ std::vector<PageR> PageRanker::rank(std::vector<char *> tokens, unsigned int num
 	std::sort(top_pages.begin(), top_pages.end(), page_cmp);
 
 	return top_pages;
+}
+
+std::vector<int> get_universe(std::string query) {
+	vector<int> universe;
+	vector<string> tokens = tokenize(query);
+
+}
+
+std::vector<PageResult> rank(std::vector<string> tokens, vector<Page> universe) {
+
+}
+
+std::vector<PageResult>	PageRanker::rank(std::string query, unsigned int num_to_rank) {
+	vector<string> tokens = tokenize(query);
+	//std::vector<int> universe = retrieve_to_rank(tokens, tokens.size());
+
+	return {
+		{"https://www.google.com"},
+		{"https://www.yahoo.com"}
+	};
 }

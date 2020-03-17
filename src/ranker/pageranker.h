@@ -6,6 +6,8 @@
 //#include "matrix.h"
 #include "search_index/index.h"
 #include "utils/vector_space.h"
+#include "ranker/tokenizer.h"
+#include "ranker/ranker_utils.h"
 #include <parallel_hashmap/phmap.h>
 
 using Eigen::Matrix;
@@ -20,18 +22,7 @@ typedef VectorXd VectorF;
 #ifndef PAGE_RANKER_H
 #define PAGE_RANKER_H
 
-struct PageR
-{
-	uint8_t score;
-	uint8_t id;
-};
 
-struct Page
-{
-	uint8_t id;
-	uint8_t pagerank;
-	VectorF tfidf_vector;
-};
 
 class PageRanker
 {
@@ -61,7 +52,11 @@ public:
 	PageRanker(Index *index, VectorF idf_weights, float idf_threshold);
 	~PageRanker();
 
+	std::vector<int> get_universe(std::string query);
+	std::vector<PageResult> rank(std::vector<string>, vector<Page> universe);
+
 	std::vector<PageR> rank(std::vector<char *> tokens, unsigned int num_to_rank);
+	std::vector<PageResult> rank(std::string query, unsigned int num_to_rank);
 };
 
 #endif

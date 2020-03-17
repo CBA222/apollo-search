@@ -111,44 +111,125 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named service_test
+# Target rules for targets named service_test_3
 
 # Build rule for target.
-service_test: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 service_test
-.PHONY : service_test
+service_test_3: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 service_test_3
+.PHONY : service_test_3
 
 # fast build rule for target.
-service_test/fast:
-	$(MAKE) -f CMakeFiles/service_test.dir/build.make CMakeFiles/service_test.dir/build
-.PHONY : service_test/fast
+service_test_3/fast:
+	$(MAKE) -f CMakeFiles/service_test_3.dir/build.make CMakeFiles/service_test_3.dir/build
+.PHONY : service_test_3/fast
 
-src/service_test.o: src/service_test.cpp.o
+src/data_service/document_service.o: src/data_service/document_service.cpp.o
 
-.PHONY : src/service_test.o
+.PHONY : src/data_service/document_service.o
 
 # target to build an object file
-src/service_test.cpp.o:
-	$(MAKE) -f CMakeFiles/service_test.dir/build.make CMakeFiles/service_test.dir/src/service_test.cpp.o
-.PHONY : src/service_test.cpp.o
+src/data_service/document_service.cpp.o:
+	$(MAKE) -f CMakeFiles/service_test_3.dir/build.make CMakeFiles/service_test_3.dir/src/data_service/document_service.cpp.o
+.PHONY : src/data_service/document_service.cpp.o
 
-src/service_test.i: src/service_test.cpp.i
+src/data_service/document_service.i: src/data_service/document_service.cpp.i
 
-.PHONY : src/service_test.i
+.PHONY : src/data_service/document_service.i
 
 # target to preprocess a source file
-src/service_test.cpp.i:
-	$(MAKE) -f CMakeFiles/service_test.dir/build.make CMakeFiles/service_test.dir/src/service_test.cpp.i
-.PHONY : src/service_test.cpp.i
+src/data_service/document_service.cpp.i:
+	$(MAKE) -f CMakeFiles/service_test_3.dir/build.make CMakeFiles/service_test_3.dir/src/data_service/document_service.cpp.i
+.PHONY : src/data_service/document_service.cpp.i
 
-src/service_test.s: src/service_test.cpp.s
+src/data_service/document_service.s: src/data_service/document_service.cpp.s
 
-.PHONY : src/service_test.s
+.PHONY : src/data_service/document_service.s
 
 # target to generate assembly for a file
-src/service_test.cpp.s:
-	$(MAKE) -f CMakeFiles/service_test.dir/build.make CMakeFiles/service_test.dir/src/service_test.cpp.s
-.PHONY : src/service_test.cpp.s
+src/data_service/document_service.cpp.s:
+	$(MAKE) -f CMakeFiles/service_test_3.dir/build.make CMakeFiles/service_test_3.dir/src/data_service/document_service.cpp.s
+.PHONY : src/data_service/document_service.cpp.s
+
+src/data_service/mq/channel.o: src/data_service/mq/channel.cpp.o
+
+.PHONY : src/data_service/mq/channel.o
+
+# target to build an object file
+src/data_service/mq/channel.cpp.o:
+	$(MAKE) -f CMakeFiles/service_test_3.dir/build.make CMakeFiles/service_test_3.dir/src/data_service/mq/channel.cpp.o
+.PHONY : src/data_service/mq/channel.cpp.o
+
+src/data_service/mq/channel.i: src/data_service/mq/channel.cpp.i
+
+.PHONY : src/data_service/mq/channel.i
+
+# target to preprocess a source file
+src/data_service/mq/channel.cpp.i:
+	$(MAKE) -f CMakeFiles/service_test_3.dir/build.make CMakeFiles/service_test_3.dir/src/data_service/mq/channel.cpp.i
+.PHONY : src/data_service/mq/channel.cpp.i
+
+src/data_service/mq/channel.s: src/data_service/mq/channel.cpp.s
+
+.PHONY : src/data_service/mq/channel.s
+
+# target to generate assembly for a file
+src/data_service/mq/channel.cpp.s:
+	$(MAKE) -f CMakeFiles/service_test_3.dir/build.make CMakeFiles/service_test_3.dir/src/data_service/mq/channel.cpp.s
+.PHONY : src/data_service/mq/channel.cpp.s
+
+src/logging/defer_logger.o: src/logging/defer_logger.cpp.o
+
+.PHONY : src/logging/defer_logger.o
+
+# target to build an object file
+src/logging/defer_logger.cpp.o:
+	$(MAKE) -f CMakeFiles/service_test_3.dir/build.make CMakeFiles/service_test_3.dir/src/logging/defer_logger.cpp.o
+.PHONY : src/logging/defer_logger.cpp.o
+
+src/logging/defer_logger.i: src/logging/defer_logger.cpp.i
+
+.PHONY : src/logging/defer_logger.i
+
+# target to preprocess a source file
+src/logging/defer_logger.cpp.i:
+	$(MAKE) -f CMakeFiles/service_test_3.dir/build.make CMakeFiles/service_test_3.dir/src/logging/defer_logger.cpp.i
+.PHONY : src/logging/defer_logger.cpp.i
+
+src/logging/defer_logger.s: src/logging/defer_logger.cpp.s
+
+.PHONY : src/logging/defer_logger.s
+
+# target to generate assembly for a file
+src/logging/defer_logger.cpp.s:
+	$(MAKE) -f CMakeFiles/service_test_3.dir/build.make CMakeFiles/service_test_3.dir/src/logging/defer_logger.cpp.s
+.PHONY : src/logging/defer_logger.cpp.s
+
+src/service_test_3.o: src/service_test_3.cpp.o
+
+.PHONY : src/service_test_3.o
+
+# target to build an object file
+src/service_test_3.cpp.o:
+	$(MAKE) -f CMakeFiles/service_test_3.dir/build.make CMakeFiles/service_test_3.dir/src/service_test_3.cpp.o
+.PHONY : src/service_test_3.cpp.o
+
+src/service_test_3.i: src/service_test_3.cpp.i
+
+.PHONY : src/service_test_3.i
+
+# target to preprocess a source file
+src/service_test_3.cpp.i:
+	$(MAKE) -f CMakeFiles/service_test_3.dir/build.make CMakeFiles/service_test_3.dir/src/service_test_3.cpp.i
+.PHONY : src/service_test_3.cpp.i
+
+src/service_test_3.s: src/service_test_3.cpp.s
+
+.PHONY : src/service_test_3.s
+
+# target to generate assembly for a file
+src/service_test_3.cpp.s:
+	$(MAKE) -f CMakeFiles/service_test_3.dir/build.make CMakeFiles/service_test_3.dir/src/service_test_3.cpp.s
+.PHONY : src/service_test_3.cpp.s
 
 # Help Target
 help:
@@ -157,11 +238,20 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
-	@echo "... service_test"
+	@echo "... service_test_3"
 	@echo "... edit_cache"
-	@echo "... src/service_test.o"
-	@echo "... src/service_test.i"
-	@echo "... src/service_test.s"
+	@echo "... src/data_service/document_service.o"
+	@echo "... src/data_service/document_service.i"
+	@echo "... src/data_service/document_service.s"
+	@echo "... src/data_service/mq/channel.o"
+	@echo "... src/data_service/mq/channel.i"
+	@echo "... src/data_service/mq/channel.s"
+	@echo "... src/logging/defer_logger.o"
+	@echo "... src/logging/defer_logger.i"
+	@echo "... src/logging/defer_logger.s"
+	@echo "... src/service_test_3.o"
+	@echo "... src/service_test_3.i"
+	@echo "... src/service_test_3.s"
 .PHONY : help
 
 

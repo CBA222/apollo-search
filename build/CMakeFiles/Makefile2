@@ -60,39 +60,39 @@ CMAKE_SOURCE_DIR = /home/cba222/projects/crawler-cpp
 CMAKE_BINARY_DIR = /home/cba222/projects/crawler-cpp/build
 
 #=============================================================================
-# Target rules for target CMakeFiles/service_test.dir
+# Target rules for target CMakeFiles/service_test_3.dir
 
 # All Build rule for target.
-CMakeFiles/service_test.dir/all:
-	$(MAKE) -f CMakeFiles/service_test.dir/build.make CMakeFiles/service_test.dir/depend
-	$(MAKE) -f CMakeFiles/service_test.dir/build.make CMakeFiles/service_test.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/cba222/projects/crawler-cpp/build/CMakeFiles --progress-num=1,2 "Built target service_test"
-.PHONY : CMakeFiles/service_test.dir/all
+CMakeFiles/service_test_3.dir/all:
+	$(MAKE) -f CMakeFiles/service_test_3.dir/build.make CMakeFiles/service_test_3.dir/depend
+	$(MAKE) -f CMakeFiles/service_test_3.dir/build.make CMakeFiles/service_test_3.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/cba222/projects/crawler-cpp/build/CMakeFiles --progress-num=1,2,3,4,5 "Built target service_test_3"
+.PHONY : CMakeFiles/service_test_3.dir/all
 
 # Include target in all.
-all: CMakeFiles/service_test.dir/all
+all: CMakeFiles/service_test_3.dir/all
 
 .PHONY : all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/service_test.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/cba222/projects/crawler-cpp/build/CMakeFiles 2
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/service_test.dir/all
+CMakeFiles/service_test_3.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/cba222/projects/crawler-cpp/build/CMakeFiles 5
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/service_test_3.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/cba222/projects/crawler-cpp/build/CMakeFiles 0
-.PHONY : CMakeFiles/service_test.dir/rule
+.PHONY : CMakeFiles/service_test_3.dir/rule
 
 # Convenience name for target.
-service_test: CMakeFiles/service_test.dir/rule
+service_test_3: CMakeFiles/service_test_3.dir/rule
 
-.PHONY : service_test
-
-# clean rule for target.
-CMakeFiles/service_test.dir/clean:
-	$(MAKE) -f CMakeFiles/service_test.dir/build.make CMakeFiles/service_test.dir/clean
-.PHONY : CMakeFiles/service_test.dir/clean
+.PHONY : service_test_3
 
 # clean rule for target.
-clean: CMakeFiles/service_test.dir/clean
+CMakeFiles/service_test_3.dir/clean:
+	$(MAKE) -f CMakeFiles/service_test_3.dir/build.make CMakeFiles/service_test_3.dir/clean
+.PHONY : CMakeFiles/service_test_3.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/service_test_3.dir/clean
 
 .PHONY : clean
 

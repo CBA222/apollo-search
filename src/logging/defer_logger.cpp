@@ -15,6 +15,7 @@ DeferLogger::~DeferLogger() {
 }
 
 void DeferLogger::LOG(string msg, LOG_LEVEL level) {
+    std::lock_guard<std::mutex> lock(queue_mutex);
     backlog[level].push(msg);
 }
 
@@ -23,7 +24,7 @@ void DeferLogger::message_loop() {
         for (auto it = backlog.begin();it != backlog.end();it++) {
             if (!((it->second).empty())) {
                 string msg = (it->second).back();
-                msg = "[] " + msg;
+                msg = "[" + LEVEL_NAMES[it->first] + "] " + msg;
                 process_message(msg);
                 (it->second).pop();
             }

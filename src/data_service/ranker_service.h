@@ -14,6 +14,7 @@
 #include <condition_variable>
 #include <toml11/toml.hpp>
 #include <iostream>
+#include <signal.h>
 
 
 using std::string;

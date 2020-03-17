@@ -8,4 +8,4 @@ class DataServiceClient
 {
 public:
     virtual void send_message(MESSAGE_TYPE msg_type);
-}
+};

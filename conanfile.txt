@@ -6,10 +6,9 @@ nlohmann_json/3.7.3
 parallel-hashmap/1.30
 libevent/2.1.11
 amqp-cpp/4.1.6
-spdlog/1.5.0
-yaml-cpp/0.6.3
-gtest/1.10.0
 toml11/3.1.0
+cppzmq/4.6.0
+fmt/6.1.2
 
 [generators]
 cmake

@@ -24,6 +24,7 @@ private:
         return hash;
     }
 public:
+    VectorSpace() {};
     /* 
      * NO DUPLICATE CHECKS
      * 
